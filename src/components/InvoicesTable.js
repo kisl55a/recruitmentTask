@@ -77,6 +77,7 @@ export default function CollapsibleTable() {
                         <TableCell align="right">Post Index</TableCell>
                         <TableCell align="right">City</TableCell>
                         <TableCell align="right">Due date</TableCell>
+                        <TableCell align="right">Edit</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

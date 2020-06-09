@@ -23,6 +23,7 @@ const useRowStyles = makeStyles({
     },
 });
 // TODO: change to proper props
+// TODO: set default values to prevent null in table cells 
 Row.propTypes = {
     row: PropTypes.shape({
         calories: PropTypes.number.isRequired,
@@ -44,7 +45,6 @@ Row.propTypes = {
 export default function Row(props) {
     const { row } = props;
     const item = row;
-    console.log('item: ', item);
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
 
@@ -63,9 +63,15 @@ export default function Row(props) {
                 <TableCell align="right">{item.zip}</TableCell>
                 <TableCell align="right">{item.city}</TableCell>
                 <TableCell align="right">{item.due_date}</TableCell>
+                <TableCell align="right">
+                    <Button variant="outlined" color="primary">
+                        Edit
+                  </Button>
+                </TableCell>
+
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
                             <Typography variant="h6" gutterBottom component="div">
