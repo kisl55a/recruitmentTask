@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import InvoicesTable from './InvoicesTable'
-// TODO: change styles of links 
+// TODO: change styles of links
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -58,13 +58,13 @@ export default function MainPage() {
                 <Grid item>
                     <RouterLink to='/createItem' style={{textDecoration: 'none'}}>
                   <Button variant="contained" color="primary">
-                    Create a new invoice 
+                    Create new company
                   </Button>
                   </RouterLink>
                 </Grid>
                 <Grid item>
                   <Button variant="outlined" color="primary">
-                    Nothing here 
+                    Create new invoice
                   </Button>
                 </Grid>
               </Grid>
