@@ -8,65 +8,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableItem from './TableItem'
-
-const dataJson = [
-    {
-        "id": 1,
-        "name": "Test company",
-        "street": "Testikatu 1",
-        "zip": "00100",
-        "city": "Helsinki",
-        "due_date": "2020-08-01",
-        "rows": [
-            {
-                "quantity": 3,
-                "currency": "EUR",
-                "unit_price": 1.24,
-                "unit_of_measurement": "kpl",
-                "vat": 24,
-                "name": "Sample invoice row 1"
-            },
-            {
-                "quantity": -1,
-                "currency": "EUR",
-                "unit_price": 2.48,
-                "unit_of_measurement": "kpl",
-                "vat": 24,
-                "name": "Sample invoice row 2"
-            }
-        ]
-    },
-    {
-        "id": 2,
-        "name": "Another test company",
-        "street": "Testikatu 3",
-        "zip": "00100",
-        "city": "Helsinki",
-        "due_date": "2020-08-05",
-        "rows": [
-            {
-                "quantity": 1,
-                "currency": "EUR",
-                "unit_price": 150,
-                "unit_of_measurement": null,
-                "vat": 0,
-                "name": "Sample row"
-            }
-        ]
-    }
-]
-
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import { increment } from './actions';
+// TODO: hide arrow down when there is no Invoices
 export default function CollapsibleTable() {
-
+    const items = useSelector(state => state.items)
     const [data, setData] = useState([]);
-
     useEffect(() => {
-        setData(dataJson)
-    }, [])
-
-    return (
+        setData(items)
+    }, [items])
+    console.log(data);
+    
+    const dispatch = useDispatch();
+      return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead>

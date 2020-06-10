@@ -6,70 +6,82 @@ import { DatePicker } from 'formik-material-ui-pickers';
 import Card from "@material-ui/core/Card";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { useSelector, useDispatch } from 'react-redux';
+import { addCompany } from './actions';
 
 
 interface Values {
-	name: string,
-	street: string,
-	zip: number,
-	city: string,
-	due_date: dateFns
+  name: string,
+  street: string,
+  zip: number,
+  city: string,
+  due_date: dateFns
 }
 
 const useStyles = makeStyles((theme) => ({
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 165,
-	  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 165,
+  },
 }));
 
 export default function CompanyForm(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  //Here is supposed to be function to sending post
+  //request to the API
+  const sendData = async (values) => {
+    values.due_date = JSON.stringify(values.due_date).substring(1,11);
+    values.rows = [];
+    dispatch(addCompany(values))
+  
+  }
 
   return (
     <Formik
       initialValues={{
         name: "",
         street: "",
-		zip: "",
-		city: "",
-		due_date: new Date(),
+        zip: "",
+        city: "",
+        due_date: new Date(),
       }}
       validate={(values) => {
         const errors: Partial<Values> = {};
         if (!values.name) {
           errors.name = "Required";
         }
-		if (!values.street) {
+        if (!values.street) {
           errors.street = "Required";
-		}
-		if (!values.zip) {
+        }
+        if (!values.zip) {
           errors.zip = "Required";
-		} else if (
-			!/^((\d{5}-\d{4})|(\d{5})|([AaBbCcEeGgHhJjKkLlMmNnPpRrSsTtVvXxYy]\d[A-Za-z]\s?\d[A-Za-z]\d))$/i.test(values.zip)
-		){
-			errors.zip = "Wrong post number"
-		}
-		if (!values.city) {
+        } else if (
+          !/^((\d{5}-\d{4})|(\d{5})|([AaBbCcEeGgHhJjKkLlMmNnPpRrSsTtVvXxYy]\d[A-Za-z]\s?\d[A-Za-z]\d))$/i.test(values.zip)
+        ) {
+          errors.zip = "Wrong post number"
+        }
+        if (!values.city) {
           errors.zip = "Required";
-		}
-		if (!values.due_date) {
+        }
+        if (!values.due_date) {
           errors.due = "Required";
-		}
+        }
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           setSubmitting(false);
-          alert(JSON.stringify(values, null, 2));
+          sendData(values)
+          // alert(JSON.stringify(values, null, 2));
         }, 500);
       }}
     >
       {({ submitForm, isSubmitting }) => (
         <Card variant="outlined" >
           <Form>
-		  <Typography variant="h6" align="center" color="textSecondary" paragraph>
-               Company
+            <Typography variant="h6" align="center" color="textSecondary" paragraph>
+              Company
             </Typography>
             <br />
             <Field
@@ -85,12 +97,12 @@ export default function CompanyForm(props) {
               label="Street"
               name="street"
             />
-			<br />
+            <br />
             <Field
               component={TextField}
               name="zip"
               type="number"
-			  max = "5"
+              max="5"
               label="Zip"
             />
             <br />
@@ -100,7 +112,7 @@ export default function CompanyForm(props) {
               type="text"
               label="City"
             />
-			<br />
+            <br />
             <Field
               component={DatePicker}
               name="due_date"

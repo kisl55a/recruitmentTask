@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link as RouterLink}from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { loadData } from './actions';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -8,7 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import InvoicesTable from './InvoicesTable'
-// TODO: change styles of links
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -38,7 +39,72 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const dataJson = [
+  {
+      "id": 1,
+      "name": "Test company",
+      "street": "Testikatu 1",
+      "zip": "00100",
+      "city": "Helsinki",
+      "due_date": "2020-08-01",
+      "rows": [
+          {
+              "quantity": 3,
+              "currency": "EUR",
+              "unit_price": 1.24,
+              "unit_of_measurement": "kpl",
+              "vat": 24,
+              "name": "Sample invoice row 1"
+          },
+          {
+              "quantity": -1,
+              "currency": "EUR",
+              "unit_price": 2.48,
+              "unit_of_measurement": "kpl",
+              "vat": 24,
+              "name": "Sample invoice row 2"
+          }
+      ]
+  },
+  {
+      "id": 2,
+      "name": "Another test company",
+      "street": "Testikatu 3",
+      "zip": "00100",
+      "city": "Helsinki",
+      "due_date": "2020-08-05",
+      "rows": [
+          {
+              "quantity": 1,
+              "currency": "EUR",
+              "unit_price": 150,
+              "unit_of_measurement": null,
+              "vat": 0,
+              "name": "Sample row"
+          }
+      ]
+  }
+]
+
 export default function MainPage() {
+  const items = useSelector(state => state.items)
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //Here is supposed to be a first initial request
+    //to the API to load data
+    if(items.length === 0)
+      setData(dataJson)
+      else 
+      setData(items)
+  }, []);
+
+  useEffect(() => {
+    if(items.length === 0)
+    dispatch(loadData(data))
+  }, [data])
+
   const classes = useStyles();
 
   return (
