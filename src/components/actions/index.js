@@ -10,3 +10,9 @@ export const addCompany = (item) => {
         payload: item
     }
 }
+export const addInvoice = (invoice) => {
+    return {
+        type: 'ADD_INVOICE',
+        payload: invoice
+    }
+}

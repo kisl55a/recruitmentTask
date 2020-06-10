@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCompany } from './actions';
 
+// TODO add trim form validation
 
 interface Values {
   name: string,
@@ -34,7 +35,6 @@ export default function CompanyForm(props) {
     values.due_date = JSON.stringify(values.due_date).substring(1,11);
     values.rows = [];
     dispatch(addCompany(values))
-  
   }
 
   return (

@@ -2,7 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainPage from './components/MainPage';
 import Header from './components/Header';
-import CreateItem from './components/CreateItem';
+import CreateCompany from './components/CreateCompany';
+import CreateInvoice from './components/CreateInvoice';
+
 import Footer from './components/Footer';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -14,7 +16,8 @@ function App() {
       <Header/>
       <Switch>
         <Route path="/" exact component={MainPage} />
-        <Route path="/createItem" component={CreateItem} />
+        <Route path="/createCompany" component={CreateCompany} />
+        <Route path="/createInvoice" component={CreateInvoice} />
       </Switch>
       <Footer/>
     </Router>

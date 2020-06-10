@@ -122,16 +122,18 @@ export default function MainPage() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                    <RouterLink to='/createItem' style={{textDecoration: 'none'}}>
+                    <RouterLink to='/createCompany' style={{textDecoration: 'none'}}>
                   <Button variant="contained" color="primary">
                     Create new company
                   </Button>
                   </RouterLink>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary">
+                <RouterLink to='/createInvoice' style={{textDecoration: 'none'}}>
+                  <Button variant="contained" color="primary">
                     Create new invoice
                   </Button>
+                  </RouterLink>
                 </Grid>
               </Grid>
             </div>
