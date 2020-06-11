@@ -8,20 +8,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import externalData from './data';
 import { deleteCompany, deleteInvoice } from './actions';
 
 import InvoicesTable from './InvoicesTable'
 import Alert from './Alert';
-
-// TODO add loader
-// TODO move sendData function to parent components to increase reusability of children
-// TODO set default value of state to prevent mistakes
-// TODO add popups
-// TODO add comments
-// TODO check other files for TODOS
-// TODO change the redux states
-// TODO rerouting when the form is submitted 
+// Check logs react
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -50,52 +42,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const dataJson = [
-  {
-    "id": 1,
-    "name": "Test company",
-    "street": "Testikatu 1",
-    "zip": "00100",
-    "city": "Helsinki",
-    "due_date": "2020-08-01",
-    "rows": [
-      {
-        "quantity": 3,
-        "currency": "EUR",
-        "unit_price": 1.24,
-        "unit_of_measurement": "kpl",
-        "vat": 24,
-        "name": "Sample invoice row 1"
-      },
-      {
-        "quantity": -1,
-        "currency": "EUR",
-        "unit_price": 2.48,
-        "unit_of_measurement": "kpl",
-        "vat": 24,
-        "name": "Sample invoice row 2"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Another test company",
-    "street": "Testikatu 3",
-    "zip": "00100",
-    "city": "Helsinki",
-    "due_date": "2020-08-05",
-    "rows": [
-      {
-        "quantity": 1,
-        "currency": "EUR",
-        "unit_price": 150,
-        "unit_of_measurement": null,
-        "vat": 0,
-        "name": "Sample row"
-      }
-    ]
-  }
-]
+
 
 export default function MainPage() {
   const items = useSelector(state => state.items)
@@ -105,13 +52,14 @@ export default function MainPage() {
   const [name, setName] = useState(false)
   const [update, setUpdate] = useState(true)
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   useEffect(() => {
     // Here is supposed to be a first initial request
     // to the API to load data
-    // also make requests to reload data after deletion 
+    // also make requests(GET) to reload data after deletion 
     if (items.length === 0)
-      setData(dataJson)
+      setData(externalData)
     else
       setData(items)
   }, [items, update]);
@@ -121,39 +69,32 @@ export default function MainPage() {
       dispatch(loadData(data))
   }, [data])
 
-  const deleteModal = ({id, name}) => {
+  const deleteModal = ({ id, name }) => {
     setOpen(true);
-    if(id) {
+    if (id) {
       setId(id)
     }
-    if(name){
+    if (name) {
       setName(name)
     }
   };
 
   const handleClose = (reply) => {
-    console.log('reply: ', reply);
     setOpen(false);
-    if(reply){
-      console.log('name: ', name, id);
+    if (reply) {
       (name) ? deleteInv(id, name) : deleteCom(id)
     }
   };
 
+  // Here is supposed to be delete requests to the external API
   const deleteCom = async (id) => {
     await dispatch(deleteCompany(id))
     setUpdate(!update)
   }
-
   const deleteInv = async (companyId, name) => {
     await dispatch(deleteInvoice(companyId, name))
     setUpdate(!update)
   }
-
-
-
-
-  const classes = useStyles();
 
   return (
     <React.Fragment>
@@ -190,7 +131,7 @@ export default function MainPage() {
           deleteItem={deleteModal}
         />
       </main>
-      <Alert 
+      <Alert
         open={open}
         handleClose={handleClose}
       />

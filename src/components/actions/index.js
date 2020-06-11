@@ -23,10 +23,10 @@ export const editCompany = (company) => {
     }
 }
 
-export const editInvoice = (invoice) => {
+export const editInvoice = (invoice, searchName) => {
     return {
         type: 'EDIT_INVOICE',
-        payload: invoice
+        payload: {invoice, searchName}
     }
 }
 export const deleteCompany = (id) => {

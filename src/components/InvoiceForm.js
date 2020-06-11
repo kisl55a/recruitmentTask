@@ -8,10 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-// TODO when createInvoice is opened at first it doesnt upload the companies
-// because they are uploaded on the main page
-// TODO add trim form validation
-// TODO delete ID addition when submiting invoice
+
 
 interface Values {
   name: string;
@@ -37,14 +34,14 @@ export default function CompanyForm(props) {
         props.invoice
           ? props.invoice
           : {
-              company: 1,
-              quantity: 0,
-              currency: "EUR",
-              unit_price: 0,
-              unit_of_measurement: "kpl",
-              vat: 0,
-              name: "",
-            }
+            company: 1,
+            quantity: 0,
+            currency: "EUR",
+            unit_price: 0,
+            unit_of_measurement: "kpl",
+            vat: 0,
+            name: "",
+          }
       }
       validate={(values) => {
         const errors: Partial<Values> = {};
@@ -65,8 +62,6 @@ export default function CompanyForm(props) {
         }
         if (!values.vat) {
           errors.vat = "Required";
-        } else if (values.vat < 0) {
-          errors.vat = "Should be positive";
         }
         if (!values.name) {
           errors.name = "Required";
@@ -77,7 +72,6 @@ export default function CompanyForm(props) {
         setTimeout(() => {
           setSubmitting(false);
           props.sendData(values);
-        //   alert(JSON.stringify(values, null, 2));
         }, 500);
       }}
     >
@@ -95,7 +89,10 @@ export default function CompanyForm(props) {
             <br />
             <FormControl>
               <InputLabel>Company</InputLabel>
-              <Field component={Select} disabled = {(props.invoice && props.invoice.company) ? true : false} name="company">
+              <Field 
+              component={Select} 
+              disabled={(props.invoice && props.invoice.company) ? true : false} 
+              name="company">
                 {props.items.map((item, key) => {
                   return (
                     <MenuItem key={key} value={item.id}>

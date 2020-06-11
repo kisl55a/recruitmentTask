@@ -8,27 +8,27 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function Alert(props) {
 
-  return (
-      <Dialog
-        open={props.open}
-        onClose={props.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Do you want to delete?
+    return (
+        <Dialog
+            open={props.open}
+            onClose={props.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+        >
+            <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    Do you want to delete?
           </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => props.handleClose(false)} color="primary">
-            Disagree
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={() => props.handleClose(false)} color="primary">
+                    Back
           </Button>
-          <Button onClick={() => props.handleClose(true)} color="primary" autoFocus>
-            Agree
+                <Button onClick={() => props.handleClose(true)} color="primary" autoFocus>
+                    Yes
           </Button>
-        </DialogActions>
-      </Dialog>
-  );
+            </DialogActions>
+        </Dialog>
+    );
 }

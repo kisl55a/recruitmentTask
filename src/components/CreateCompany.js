@@ -3,8 +3,9 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addCompany } from './actions';
+import { useHistory } from "react-router-dom";
 
 import CompanyForm from './CompanyForm';
 
@@ -16,14 +17,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CreateItem() {
-	const dispatch = useDispatch();
-	//Here is supposed to be function to sending post
-	//request to the API
-	const sendData = async (values) => {
-	  values.due_date = JSON.stringify(values.due_date).substring(1,11);
-	  values.rows = [];
-	  dispatch(addCompany(values))
-	}
+  const dispatch = useDispatch();
+  const history = useHistory()
+
+  //Here is supposed to be function to sending post
+  //request to the API
+  const sendData = async (values) => {
+    values.due_date = JSON.stringify(values.due_date).substring(1, 11);
+    values.rows = [];
+    //"Request"
+    await dispatch(addCompany(values));
+    history.push('/');
+  }
   const classes = useStyles();
 
   return (

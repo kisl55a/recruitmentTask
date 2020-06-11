@@ -9,18 +9,16 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableItem from './TableItem'
 import { useSelector, useDispatch } from 'react-redux';
-// TODO: hide arrow down when there is no Invoices
 export default function InvoicesTable(props) {
+
     const items = useSelector(state => state.items)
     const [data, setData] = useState([]);
     useEffect(() => {
         setData(items)
     }, [items])
-    console.log(data);
-
-    const dispatch = useDispatch();
-      return (
-        <TableContainer component={Paper}>
+    
+    return (
+        <TableContainer component={Paper} style={{ borderTop: "1px solid rgb(212, 212, 212)" }}>
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
@@ -35,10 +33,10 @@ export default function InvoicesTable(props) {
                 </TableHead>
                 <TableBody>
                     {data.map((row) => (
-                        <TableItem 
-                        key={row.id} 
-                        row={row}
-                        deleteItem={props.deleteItem}
+                        <TableItem
+                            key={row.id}
+                            row={row}
+                            deleteItem={props.deleteItem}
                         />
                     ))}
                 </TableBody>

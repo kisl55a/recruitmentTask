@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useSelector, useDispatch } from "react-redux";
 import { addInvoice } from "./actions";
+import { useHistory } from "react-router-dom";
 
 import InvoiceForm from "./InvoiceForm";
 
@@ -17,10 +18,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateInvoice() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const items = useSelector((state) => state.items);
   const classes = useStyles();
+  
+  //Here is supposed to be function to sending post
+	//request to the API
   const sendData = async (values) => {
-    dispatch(addInvoice(values));
+    //"Request"
+    await dispatch(addInvoice(values));
+    history.push('/');
   };
   return (
     <div className={classes.heroContent}>

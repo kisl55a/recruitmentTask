@@ -2,8 +2,10 @@ const items = (state = [], action) => {
 	switch (action.type) {
 		case 'LOAD_ITEMS':
 			return action.payload;
+
 		case 'ADD_COMPANY':
-			return [...state, { id: state.length + 1, ...action.payload }]
+			return [...state, { id: state.length + 1, ...action.payload }];
+
 		case 'EDIT_COMPANY':
 			for (let i = 0; i < state.length; i++) {
 				const element = state[i];
@@ -16,7 +18,6 @@ const items = (state = [], action) => {
 		case 'DELETE_COMPANY':
 			for (let i = 0; i < state.length; i++) {
 				const element = state[i];
-				console.log('element: ', element);
 				if (element.id == action.payload) {
 					state.splice(i, 1)
 				}
@@ -25,21 +26,19 @@ const items = (state = [], action) => {
 
 		case 'ADD_INVOICE':
 			let invoice = action.payload
-			let previousState = state
-			for (let i = 0; i < previousState.length; i++) {
-				if (previousState[i].id == invoice.company) {
-					previousState[i].rows = [...previousState[i].rows, invoice]
+			for (let i = 0; i < state.length; i++) {
+				if (state[i].id == invoice.company) {
+					state[i].rows = [...state[i].rows, invoice]
 				}
 			}
-			return previousState
+			return state
 		case 'EDIT_INVOICE':
-			let item = action.payload
+			let item = action.payload.invoice;
+			let searchName = action.payload.searchName
 			for (let i = 0; i < state.length; i++) {
 				if (state[i].id == item.company) {
-					console.log('state[i]: ', state[i]);
 					state[i].rows.forEach((element, k) => {
-						if (element.name == item.name) {
-							console.log('item.name: ', item.name);
+						if (element.name == searchName) {
 							state[i].rows[k] = item;
 						}
 					});
@@ -49,7 +48,6 @@ const items = (state = [], action) => {
 
 		case 'DELETE_INVOICE':
 			let company = action.payload.companyId
-			console.log('company: ', company);
 			let name = action.payload.name
 			for (let i = 0; i < state.length; i++) {
 				if (state[i].id == company) {
@@ -61,6 +59,7 @@ const items = (state = [], action) => {
 				}
 			}
 			return state
+			
 		default:
 			return state
 	}

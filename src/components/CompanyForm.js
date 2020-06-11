@@ -7,7 +7,6 @@ import Card from "@material-ui/core/Card";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-// TODO add trim form validation
 
 interface Values {
   name: string,
@@ -30,14 +29,14 @@ export default function CompanyForm(props) {
   return (
     <Formik
       initialValues={(props.company) ?
-	  props.company :
-	  {
-        name: "",
-        street: "",
-        zip: "",
-        city: "",
-        due_date: new Date(),
-      }}
+        props.company :
+        {
+          name: "",
+          street: "",
+          zip: "",
+          city: "",
+          due_date: new Date(),
+        }}
       validate={(values) => {
         const errors: Partial<Values> = {};
         if (!values.name) {
