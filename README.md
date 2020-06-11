@@ -1,7 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href='https://invoiceappforthecompany.netlify.app'><h3>App online<h3></a>
+<h2>Small description of the application</h2>
+This is a small app for creating/editing/deleting invoices for companies. <br>
+The main functionality is pretty intuitive - on the main page user can find table and buttons for controlling it.<br>
+The initial data is uploaded to redux state from a json object when the main page is rendered. Then all the components work with redux state. <br>
+Forms are made with Formik npm package have basic validation, but nothing has been said specified about it. <br>
+Design is made using Material UI <br>
+In the code you can find comments where API requests are supposed to be sent if it was used. <br>
+<h2>Small description of the way I worked</h2>
+First of all when I was given the task to create react app using Material UI, Formik and Redux I understood that I have good knowledge only of Redux out of that list, so I started investigating on Material UI and Formik. I googled some templates to understand the main principles and then I started thinking how the data flow and components will be organized. After the theoretical part I started the implementation. I was doing it when I had free time and was adding things step by step, starting from UI going to dataflow.
+<br> 
+The only difficulties I have were related to getting used to new techs, because I wanted to polish my app.
+
+
+
+
 
 ## Available Scripts
-
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 In the project directory, you can run:
 
 ### `yarn start`
