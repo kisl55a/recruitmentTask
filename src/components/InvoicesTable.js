@@ -18,7 +18,7 @@ export default function CollapsibleTable() {
         setData(items)
     }, [items])
     console.log(data);
-    
+
     const dispatch = useDispatch();
       return (
         <TableContainer component={Paper}>
@@ -31,7 +31,7 @@ export default function CollapsibleTable() {
                         <TableCell align="right">Post Index</TableCell>
                         <TableCell align="right">City</TableCell>
                         <TableCell align="right">Due date</TableCell>
-                        <TableCell align="right">Edit</TableCell>
+                        <TableCell align="right">Edit/Delete</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

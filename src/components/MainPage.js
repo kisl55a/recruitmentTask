@@ -10,7 +10,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import InvoicesTable from './InvoicesTable'
-
+// TODO add loader
+// TODO move sendData function to parent components to increase reusability of children
+// TODO set default value of state to prevent mistakes
+// TODO add popups
+// TODO add comments
+// TODO check other files for TODOS
+// TODO change the redux states
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -96,7 +102,7 @@ export default function MainPage() {
     //to the API to load data
     if(items.length === 0)
       setData(dataJson)
-      else 
+      else
       setData(items)
   }, []);
 

@@ -4,9 +4,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useSelector, useDispatch } from "react-redux";
-import { addInvoice } from "./actions";
+import CompanyForm from "./CompanyForm";
+import { editCompany } from './actions';
 
-import InvoiceForm from "./InvoiceForm";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -15,20 +15,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CreateInvoice() {
-  const dispatch = useDispatch();
-  const items = useSelector((state) => state.items);
+export default function EditCompany(props) {
   const classes = useStyles();
-  const sendData = async (values) => {
-    dispatch(addInvoice(values));
-  };
+  const dispatch = useDispatch();
+	const company = useSelector(state => state.items).filter(company => company.id == props.match.params.companyId)[0];
+	const sendData = async (company) => {
+		company.due_date = JSON.stringify(company.due_date).substring(1,11);
+		console.log('values: ', company);
+		dispatch(editCompany(company))
+	  }
   return (
     <div className={classes.heroContent}>
       <Container maxWidth="sm" align="center">
         <Typography variant="h2" align="center" color="textSecondary" paragraph>
-          Create new invoice
+          Edit company
         </Typography>
-        <InvoiceForm sendData={sendData} items={items} />
+        <CompanyForm sendData={sendData} company={company}/>
       </Container>
     </div>
   );

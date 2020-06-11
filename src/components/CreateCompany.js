@@ -3,6 +3,8 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useSelector, useDispatch } from 'react-redux';
+import { addCompany } from './actions';
 
 import CompanyForm from './CompanyForm';
 
@@ -14,7 +16,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CreateItem() {
-
+	const dispatch = useDispatch();
+	//Here is supposed to be function to sending post
+	//request to the API
+	const sendData = async (values) => {
+	  values.due_date = JSON.stringify(values.due_date).substring(1,11);
+	  values.rows = [];
+	  dispatch(addCompany(values))
+	}
   const classes = useStyles();
 
   return (
@@ -23,7 +32,7 @@ export default function CreateItem() {
         <Typography variant="h2" align="center" color="textSecondary" paragraph>
           Create new company
           </Typography>
-        <CompanyForm />
+        <CompanyForm sendData={sendData} />
       </Container>
     </div>
   )

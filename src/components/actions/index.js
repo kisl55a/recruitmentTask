@@ -16,3 +16,16 @@ export const addInvoice = (invoice) => {
         payload: invoice
     }
 }
+export const editCompany = (company) => {
+    return {
+        type: 'EDIT_COMPANY',
+        payload: company
+    }
+}
+
+export const editInvoice = (invoice) => {
+    return {
+        type: 'EDIT_INVOICE',
+        payload: invoice
+    }
+}

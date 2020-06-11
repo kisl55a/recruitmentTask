@@ -7,7 +7,6 @@ import Card from "@material-ui/core/Card";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { useSelector, useDispatch } from 'react-redux';
-import { addCompany } from './actions';
 
 // TODO add trim form validation
 
@@ -28,18 +27,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CompanyForm(props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  //Here is supposed to be function to sending post
-  //request to the API
-  const sendData = async (values) => {
-    values.due_date = JSON.stringify(values.due_date).substring(1,11);
-    values.rows = [];
-    dispatch(addCompany(values))
-  }
 
   return (
     <Formik
-      initialValues={{
+      initialValues={(props.company) ?
+	  props.company :
+	  {
         name: "",
         street: "",
         zip: "",
@@ -72,7 +65,7 @@ export default function CompanyForm(props) {
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           setSubmitting(false);
-          sendData(values)
+          props.sendData(values)
           // alert(JSON.stringify(values, null, 2));
         }, 500);
       }}
