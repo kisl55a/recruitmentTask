@@ -29,3 +29,17 @@ export const editInvoice = (invoice) => {
         payload: invoice
     }
 }
+export const deleteCompany = (id) => {
+    return {
+        type: 'DELETE_COMPANY',
+        payload: id
+    }
+}
+export const deleteInvoice = (companyId, name) => {
+    return {
+        type: 'DELETE_INVOICE',
+        payload: {companyId, name}
+    }
+}
+
+

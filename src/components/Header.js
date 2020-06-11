@@ -1,6 +1,6 @@
 import React from 'react'
 import Toolbar from '@material-ui/core/Toolbar';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
+import DescriptionIcon from '@material-ui/icons/Description';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
@@ -20,7 +20,7 @@ export default function Header() {
         <CssBaseline />
         <AppBar position="relative">
           <Toolbar>
-            <CameraIcon className={classes.icon} />
+            <DescriptionIcon className={classes.icon} />
             <RouterLink to='/' style={{color: 'inherit', textDecoration: 'none'}}>
 
             <Typography variant="h6" color="inherit" noWrap>

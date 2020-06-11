@@ -9,9 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableItem from './TableItem'
 import { useSelector, useDispatch } from 'react-redux';
-import { increment } from './actions';
 // TODO: hide arrow down when there is no Invoices
-export default function CollapsibleTable() {
+export default function InvoicesTable(props) {
     const items = useSelector(state => state.items)
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -36,7 +35,11 @@ export default function CollapsibleTable() {
                 </TableHead>
                 <TableBody>
                     {data.map((row) => (
-                        <TableItem key={row.id} row={row} />
+                        <TableItem 
+                        key={row.id} 
+                        row={row}
+                        deleteItem={props.deleteItem}
+                        />
                     ))}
                 </TableBody>
             </Table>

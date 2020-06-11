@@ -44,6 +44,7 @@ Row.propTypes = {
 };
 
 export default function Row(props) {
+  console.log('props: ', props);
   const { row } = props;
   const item = row;
   const [open, setOpen] = React.useState(false);
@@ -77,14 +78,9 @@ export default function Row(props) {
               Edit
             </Button>
           </RouterLink>
-          <RouterLink
-            to={`/editCompany/${item.id}`}
-            style={{ textDecoration: "none" }}
-          >
             <IconButton aria-label="delete" className={classes.margin}>
-              <DeleteIcon />
+              <DeleteIcon onClick={() => props.deleteItem({id: item.id})} />
             </IconButton>
-          </RouterLink>
         </TableCell>
       </TableRow>
       <TableRow>
@@ -128,17 +124,14 @@ export default function Row(props) {
                             Edit
                           </Button>
                         </RouterLink>
-                        <RouterLink
-                          to={`/editCompany/${item.id}`}
-                          style={{ textDecoration: "none" }}
-                        >
+
                           <IconButton
+                            onClick={() => props.deleteItem({id: item.id, name: row.name})}
                             aria-label="delete"
                             className={classes.margin}
                           >
                             <DeleteIcon />
                           </IconButton>
-                        </RouterLink>
                       </TableCell>
                     </TableRow>
                   ))}

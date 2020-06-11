@@ -21,9 +21,9 @@ export default function EditCompany(props) {
 	const company = useSelector(state => state.items).filter(company => company.id == props.match.params.companyId)[0];
 	const sendData = async (company) => {
 		company.due_date = JSON.stringify(company.due_date).substring(1,11);
-		console.log('values: ', company);
 		dispatch(editCompany(company))
-	  }
+    }
+
   return (
     <div className={classes.heroContent}>
       <Container maxWidth="sm" align="center">
